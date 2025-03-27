@@ -1,19 +1,24 @@
-# Program #3: Average Numbers
-# Assume a file containing a series of integers is named numbers.txt and exists on the computer's disk.
-# (please use the provided numbers.txt)
-# Write a program that reads all of the numbers stored in the file and calculates their total.  
-
-# The program should handle the following exceptions: 
-
-# It should handle any IOError exceptions that are raised.
-# It should handle any ValueError exceptions that are raised when the items that are read from the file 
-# are converted to a number.
-def sum_numbers_from_file():
-    ######################
-    # Add your code here #
-    ######################
-    print('In the sum_numbers_from_file function')
-
-# You don't need to change anything below this line:
-if __name__ == '__main__':
-    sum_numbers_from_file()
+#title:Average numbers
+#author: michael stoll
+#date: 3/27/2025
+#I made this program use the same file as program_2 so they can work together
+total_sum = 0
+successful_line_count = 0
+with open('random_numbers.txt', 'r') as f:
+    for line in f:
+        number = line.strip()
+        try:
+            integer = int(number)
+            print(integer)
+            total_sum += integer
+            successful_line_count += 1
+        except ValueError:
+            print('NAN (not a number)')
+try:
+    print('The sum of every integer in the file:', total_sum * (successful_line_count/successful_line_count))
+    #I added "* (successful_line_count/successful_line_count)"
+    #to prevent this dialogue from printing when the file doesn't have any numbers
+    #without otherwise changing the output
+    print('The average of this sum is:', total_sum/successful_line_count)
+except ZeroDivisionError:
+    print('No numbers exist in this file')
